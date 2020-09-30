@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bank.domain.core", "bank.domain.core\bank.domain.core.csproj", "{9658AB12-E8D6-490A-82BE-B332F848158B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bank.domain.core.test", "bank.domain.core.test\bank.domain.core.test.csproj", "{61E7FE89-48BF-4D28-939D-C85DA23C8DDE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9658AB12-E8D6-490A-82BE-B332F848158B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9658AB12-E8D6-490A-82BE-B332F848158B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9658AB12-E8D6-490A-82BE-B332F848158B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9658AB12-E8D6-490A-82BE-B332F848158B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61E7FE89-48BF-4D28-939D-C85DA23C8DDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61E7FE89-48BF-4D28-939D-C85DA23C8DDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61E7FE89-48BF-4D28-939D-C85DA23C8DDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61E7FE89-48BF-4D28-939D-C85DA23C8DDE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
