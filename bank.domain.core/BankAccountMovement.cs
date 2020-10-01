@@ -6,6 +6,8 @@ namespace bank.domain.core
     {
         public static string CONSIGN = "CONSIGN";
         public static string TAKE = "TAKE";
+        public static string PAYMENT = "PAYMENT";
+        public static string ADVANCE = "ADVANCE";
         public decimal BalanceOld { get; private set; }
         public decimal ValueCredit { get; private set; }
         public decimal ValueDebit { get; private set; }
