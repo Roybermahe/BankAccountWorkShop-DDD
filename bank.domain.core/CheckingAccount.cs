@@ -18,7 +18,7 @@ namespace bank.domain.core
             Balance -= takeQuantity + ((Balance * 4) / 1000);
             if (Balance >= OverdraftBalance)
             {
-                saveMovement(new BankAccountMovement(balanceOld, 0, takeQuantity, BankAccountMovement.TAKE, dates));
+                saveMovement(new BankAccountMovement(balanceOld, 0, takeQuantity, BankAccountMovement.COMISION, dates));
                 return result;   
             }
             Balance = balanceOld;

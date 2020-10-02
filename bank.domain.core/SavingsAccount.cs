@@ -16,9 +16,12 @@ namespace bank.domain.core
             if (Balance < 20000) return result;
             var balanceOld = Balance;
             Balance -= takeQuantity;
-            if (countTakeMonth(dates) >= 3)
-                Balance -= 5000;
             saveMovement(new BankAccountMovement(balanceOld, 0, takeQuantity, BankAccountMovement.TAKE, dates));
+            if (countTakeMonth(dates) >= 3) {
+                balanceOld = Balance;
+                Balance -= 5000;
+                saveMovement(new BankAccountMovement(balanceOld, 0, takeQuantity, BankAccountMovement.COMISION, dates));
+            }
             result = $"Usted acaba de retirar $ {takeQuantity:n2} de su cuenta de ahorros, Saldo restante {Balance}";
             return result;
         }
