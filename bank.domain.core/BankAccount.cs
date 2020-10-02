@@ -37,6 +37,6 @@ namespace bank.domain.core
             _movimientos.Add(movement);
         }
         abstract public string Takes(decimal value, IDates date);
-        abstract public string Consign(decimal takeQuantity, IDates date);
+        abstract public string Consign(decimal takeQuantity, IDates date, string city = "");
     }
 }

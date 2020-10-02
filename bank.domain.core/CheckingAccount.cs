@@ -6,8 +6,9 @@ namespace bank.domain.core
     {
         private decimal OverdraftQuota { get => 0.2m; }
         public decimal OverdraftBalance { get; private set; }
-        public CheckingAccount(string name, string number, string city) : base(name, number, city)
+        public CheckingAccount(string name, string number, string city, decimal OverdraftBalance) : base(name, number, city)
         {
+            this.OverdraftBalance = OverdraftBalance;
         }
 
         public override string Takes(decimal takeQuantity, IDates dates)
@@ -25,7 +26,7 @@ namespace bank.domain.core
             return result;
         }
 
-        public override string Consign(decimal consignQuantity, IDates dates)
+        public override string Consign(decimal consignQuantity, IDates dates, string city = "")
         {
             var result = "No se aceptan menos de 100 mil para cuenta corriente";
             if (consignQuantity < 100000 && NoTieneConsignacion()) return result;

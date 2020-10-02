@@ -23,7 +23,7 @@ namespace bank.domain.core
             return result;
         }
 
-        public override string Consign(decimal consignQuantity, IDates dates)
+        public override string Consign(decimal consignQuantity, IDates dates, string city)
         {
             if (consignQuantity <= 0) return "El valor a consignar es incorrecto";
             if (consignQuantity < 50000 && NoTieneConsignacion()) 
@@ -31,6 +31,11 @@ namespace bank.domain.core
             var balanceOld = Balance;
             Balance += consignQuantity;
             saveMovement(new BankAccountMovement(balanceOld, consignQuantity, 0, BankAccountMovement.CONSIGN, dates));
+            if (string.Equals(city, this.City) == false) {
+                balanceOld = Balance;
+                Balance -= 10000;
+                saveMovement(new BankAccountMovement(balanceOld, consignQuantity, 0, BankAccountMovement.COMISION, dates));
+            }
             return $"Su Nuevo Saldo es de ${Balance:n2} pesos m/c";
         }
     }

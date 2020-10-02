@@ -21,7 +21,7 @@ namespace bank.domain.core.test
       [Test]
       public void consignacionInicial()
       {
-         var checkingAccount = new CheckingAccount(number: "10001", name: "Cuenta Ejemplo", city: "Valledupar");
+         var checkingAccount = new CheckingAccount(number: "10001", name: "Cuenta Ejemplo", city: "Valledupar", OverdraftBalance: 100000);
          var result = checkingAccount.Consign(5000,  new DateComplex("01/01/2020"));
          Assert.AreEqual("No se aceptan menos de 100 mil para cuenta corriente", result);
       }
@@ -29,7 +29,7 @@ namespace bank.domain.core.test
       [Test]
       public void consignacionComun()
       {
-         var checkingAccount = new CheckingAccount(number: "10001", name: "Cuenta Ejemplo", city: "Valledupar");
+         var checkingAccount = new CheckingAccount(number: "10001", name: "Cuenta Ejemplo", city: "Valledupar", OverdraftBalance: 100000);
          var result = checkingAccount.Consign(105000, new DateComplex("01/01/2020"));
          Assert.AreEqual(checkingAccount.OverdraftBalance, 21000); // up value with sobregiro
          Assert.AreEqual($"Se consignarón $ 105,000.00, su cuenta tiene {checkingAccount.Balance:n2}", result);
@@ -49,7 +49,7 @@ namespace bank.domain.core.test
       [Test]
       public void descuentoDeDinero()
       {
-         var checkingAccount = new CheckingAccount(number: "10001", name: "Cuenta Ejemplo", city: "Valledupar");
+         var checkingAccount = new CheckingAccount(number: "10001", name: "Cuenta Ejemplo", city: "Valledupar", OverdraftBalance: 100000);
          checkingAccount.Consign(225000, new DateComplex("01/01/2020"));
          var result = checkingAccount.Takes(100000, new DateComplex("01/01/2020"));
          Assert.AreEqual("Se desconto dinero de su saldo actual", result);
@@ -58,7 +58,7 @@ namespace bank.domain.core.test
       [Test]
       public void saldoMinimoSobregiro()
       {
-         var checkingAccount = new CheckingAccount(number: "10001", name: "Cuenta Ejemplo", city: "Valledupar");
+         var checkingAccount = new CheckingAccount(number: "10001", name: "Cuenta Ejemplo", city: "Valledupar", OverdraftBalance: 100000);
          checkingAccount.Consign(225000, new DateComplex("01/01/2020")); // overdraftBalance = 45000
          var result = checkingAccount.Takes(189000, new DateComplex("01/01/2020"));
          Assert.AreEqual(checkingAccount.OverdraftBalance, 45000);
@@ -68,7 +68,7 @@ namespace bank.domain.core.test
       [Test]
       public void aplicacionCuatroXMil()
       {
-         var checkingAccount = new CheckingAccount(number: "10001", name: "Cuenta Ejemplo", city: "Valledupar");
+         var checkingAccount = new CheckingAccount(number: "10001", name: "Cuenta Ejemplo", city: "Valledupar", OverdraftBalance: 100000);
          checkingAccount.Consign(225000,  new DateComplex("01/01/2020")); // overdraftBalance = 45000
          var result = checkingAccount.Takes(100000, new DateComplex("01/01/2020"));
          Assert.AreEqual(checkingAccount.Balance, 124100);
