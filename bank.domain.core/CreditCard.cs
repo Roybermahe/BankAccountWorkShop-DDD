@@ -23,7 +23,7 @@ namespace bank.domain.core
             _movimientos = new List<BankAccountMovement>();
         }
 
-        public string Consign(decimal value, string month, string year)
+        public string Consign(decimal value, IDates dates)
         {
             var result = "Se realizo el abono a la cuenta";
             if (value <= 0 || Balance < value)
@@ -31,11 +31,11 @@ namespace bank.domain.core
             var balanceOld = Balance;
             Quota += (value - (Balance - Quota));
             Balance = Quota;
-            this._movimientos.Add(new BankAccountMovement(balanceOld, value, 0, BankAccountMovement.PAYMENT, month, year));
+            this._movimientos.Add(new BankAccountMovement(balanceOld, value, 0, BankAccountMovement.PAYMENT, dates));
             return result;
         }
 
-        public string Takes(decimal takeQuantity, string month, string year)
+        public string Takes(decimal takeQuantity, IDates dates)
         {
             if( takeQuantity <= 0 || takeQuantity > Quota) 
                 return "Valor del avance no esta permitido";

@@ -26,7 +26,7 @@ namespace bank.domain.core.test
             //Preparar
             var savingsAccount = new SavingsAccount( number: "10001", name: "Cuenta Ejemplo", city: "Valledupar");
             //Acción
-            var result=savingsAccount.Consign(0, "enero", "2020");
+            var result=savingsAccount.Consign(0, new DateComplex("01/01/2020"));
             //Verificación
             Assert.AreEqual("El valor a consignar es incorrecto", result);
         }
@@ -47,7 +47,7 @@ namespace bank.domain.core.test
             //Preparar
             var savingsAccount = new SavingsAccount( number: "10001", name: "Cuenta Ejemplo", city: "Valledupar");
             //Acción
-            var resultado = savingsAccount.Consign(50000, "enero", "2020");
+            var resultado = savingsAccount.Consign(50000, new DateComplex("01/01/2020"));
             //Verificación
             Assert.AreEqual("Su Nuevo Saldo es de $50,000.00 pesos m/c", resultado);
         } 
@@ -66,7 +66,7 @@ namespace bank.domain.core.test
             //Preparar
             var savingsAccount = new SavingsAccount( number: "10001", name: "Cuenta Ejemplo", city: "Valledupar");
             //Acción
-            var result = savingsAccount.Consign(49999, "enero", "2020");
+            var result = savingsAccount.Consign(49999, new DateComplex("01/01/2020"));
             //Verificación
             Assert.AreEqual("El valor mínimo de la primera consignación debe ser de $50.000 mil pesos. Su nuevo saldo es $0 pesos", result);
         }
@@ -87,8 +87,8 @@ namespace bank.domain.core.test
     public void DescontarValorDeCuentaDeAhorro()
     {
         var savingsAccount = new SavingsAccount( number: "10001", name: "Cuenta Ejemplo", city: "Valledupar");
-        savingsAccount.Consign(50000, "enero", "2020");
-        var take = savingsAccount.Takes(5000, "enero", "2020");
+        savingsAccount.Consign(50000, new DateComplex("01/01/2020"));
+        var take = savingsAccount.Takes(5000, new DateComplex("01/01/2020"));
         Assert.AreEqual($"Usted acaba de retirar $ 5,000.00 de su cuenta de ahorros, Saldo restante {savingsAccount.Balance}", take);
     }
     
@@ -96,8 +96,8 @@ namespace bank.domain.core.test
     public void SaldoMinimoEnCuentaDeAhorro()
     {
         var savingsAccount = new SavingsAccount( number: "10001", name: "Cuenta Ejemplo", city: "Valledupar");
-        savingsAccount.Consign(0, "enero", "2020");
-        var take = savingsAccount.Takes(5000, "enero", "2020");
+        savingsAccount.Consign(0, new DateComplex("01/01/2020"));
+        var take = savingsAccount.Takes(5000, new DateComplex("01/01/2020"));
         Assert.AreEqual("No tiene suficiente saldo para realizar un retiro", take);
     }
 
@@ -105,14 +105,14 @@ namespace bank.domain.core.test
     public void LosTresRetirosDelMesSinCostoYConCosto()
     {
         var savingsAccount = new SavingsAccount(number: "10001", name: "Cuenta Ejemplo", city: "Valledupar");
-        savingsAccount.Consign(50000 , "enero", "2020");
-        savingsAccount.Takes(5000, "enero", "2020"); // first take
-        savingsAccount.Takes(5000, "enero", "2020"); // second take
-        var third = savingsAccount.Takes(5000, "enero", "2020"); // third take
+        savingsAccount.Consign(50000 ,  new DateComplex("01/01/2020"));
+        savingsAccount.Takes(5000,  new DateComplex("01/01/2020")); // first take
+        savingsAccount.Takes(5000,  new DateComplex("01/01/2020")); // second take
+        var third = savingsAccount.Takes(5000,  new DateComplex("01/01/2020")); // third take
         Assert.AreEqual($"Usted acaba de retirar $ 5,000.00 de su cuenta de ahorros, Saldo restante {savingsAccount.Balance}", third);
         Assert.AreEqual(savingsAccount.Balance, 35000);
         
-        var fourth = savingsAccount.Takes(5000, "enero", "2020"); // fourth take
+        var fourth = savingsAccount.Takes(5000,  new DateComplex("01/01/2020")); // fourth take
         Assert.AreEqual($"Usted acaba de retirar $ 5,000.00 de su cuenta de ahorros, Saldo restante {savingsAccount.Balance}", fourth);
         Assert.AreEqual(savingsAccount.Balance, 25000); //expected aplied value 5000 
     }
@@ -121,12 +121,12 @@ namespace bank.domain.core.test
     public void RetirosEnMesesDiferentes()
     {
         var savingsAccount = new SavingsAccount(number: "10001", name: "Cuenta Ejemplo", city: "Valledupar");
-        savingsAccount.Consign(50000 , "enero", "2020");
+        savingsAccount.Consign(50000 ,  new DateComplex("01/01/2020"));
 
-        savingsAccount.Takes(5000, "febrero", "2020");
+        savingsAccount.Takes(5000, new DateComplex("01/02/2020"));
         Assert.AreEqual(savingsAccount.Balance,45000);
         
-        savingsAccount.Takes(5000, "marzo", "2021");
+        savingsAccount.Takes(5000,  new DateComplex("01/03/2020"));
         Assert.AreEqual(savingsAccount.Balance,40000);
     }
     }

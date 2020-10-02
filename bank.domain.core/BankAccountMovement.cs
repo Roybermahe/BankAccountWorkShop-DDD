@@ -11,21 +11,15 @@ namespace bank.domain.core
         public decimal BalanceOld { get; private set; }
         public decimal ValueCredit { get; private set; }
         public decimal ValueDebit { get; private set; }
-        
-        public string month { get; private set; }
-        public string year { get; private set; }
         public string type { get; private set; }
-        
-        
+        public IDates dates { get; private set; }
 
-        public BankAccountMovement(decimal balanceOld, decimal valueCredit, decimal valueDebit, string type, string month, string year)
+        public BankAccountMovement(decimal balanceOld, decimal valueCredit, decimal valueDebit, string type, IDates date)
         {
             BalanceOld = balanceOld;
             ValueCredit = valueCredit;
             ValueDebit = valueDebit;
-            this.type = type;
-            this.month = month;
-            this.year = year;
+            this.dates = date;
         }
     }
 }

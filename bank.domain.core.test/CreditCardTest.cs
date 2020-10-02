@@ -27,7 +27,7 @@ namespace bank.domain.core.test
         public void realizarAbono()
         {
             var creditCard = new CreditCard("javier", "3022745897", "V/dupar", 500);
-            var result = creditCard.Consign(0, "enero", "2020");
+            var result = creditCard.Consign(0,  new DateComplex("01/01/2020"));
             Assert.AreEqual("El valor del abono no esta permitido", result);
         }
 
@@ -35,7 +35,7 @@ namespace bank.domain.core.test
         public void realizarAbonoMayorASaldo()
         {
             var creditCard = new CreditCard("javier", "3022745897", "V/dupar", 500);
-            var result = creditCard.Consign(600, "enero", "2020");
+            var result = creditCard.Consign(600,  new DateComplex("01/01/2020"));
             Assert.AreEqual(creditCard.Quota, 500);
             Assert.AreEqual(creditCard.Balance, 500);
             Assert.AreEqual("El valor del abono no esta permitido", result);
@@ -45,7 +45,7 @@ namespace bank.domain.core.test
         public void realizarAbonoExacto()
         {
             var creditCard = new CreditCard("javier", "3022745897", "V/dupar", 500);
-            var result = creditCard.Consign(500, "enero", "2020");
+            var result = creditCard.Consign(500,  new DateComplex("01/01/2020"));
             Assert.AreEqual(creditCard.Quota, creditCard.Balance);
             Assert.AreEqual("Se realizo el abono a la cuenta", result);
         }
@@ -66,7 +66,7 @@ namespace bank.domain.core.test
         public void realizarAvancesConCero()
         {
             var creditCard = new CreditCard("javier", "3022745897", "V/dupar", 500);
-            var result = creditCard.Takes(0, "enero", "2020");
+            var result = creditCard.Takes(0,  new DateComplex("01/01/2020"));
             Assert.AreEqual("Valor del avance no esta permitido", result);
         }
 
@@ -74,7 +74,7 @@ namespace bank.domain.core.test
         public void realizarAvancesConMasDeCero()
         {
             var creditCard = new CreditCard("javier", "3022745897", "V/dupar", 500);
-            var result = creditCard.Takes(400, "enero", "2020");
+            var result = creditCard.Takes(400, new DateComplex("01/01/2020"));
             Assert.AreEqual(creditCard.Balance, 100);
             Assert.AreEqual("Se realizo el avance", result);
         }
@@ -83,7 +83,7 @@ namespace bank.domain.core.test
         public void realizarAvancesConMasDeLaQuota()
         {
             var creditCard = new CreditCard("javier", "3022745897", "V/dupar", 500);
-            var result = creditCard.Takes(600, "enero", "2020");
+            var result = creditCard.Takes(600, new DateComplex("01/01/2020"));
             Assert.AreEqual(creditCard.Balance, 500);
             Assert.AreEqual("Valor del avance no esta permitido", result);
         }
