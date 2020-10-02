@@ -4,6 +4,8 @@ namespace bank.domain.core
 {
     public class BankAccountMovement
     {
+        public static string CONSIGNCDT = "CONSIGN-CDT";
+        public static string TAKECDT = "TAKE-CDT";
         public static string CONSIGN = "CONSIGN";
         public static string TAKE = "TAKE";
         public static string PAYMENT = "PAYMENT";
